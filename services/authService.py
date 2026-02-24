@@ -29,3 +29,15 @@ def register_user(database, user_data):
     except IntegrityError:
         database.rollback()
         return None
+
+
+def authenticate_user(database, user_data):
+    user = database.query(User).filter(User.email == user_data.email).first()
+
+    if not user:
+        return False
+
+    if not verify_password(user_data.password, user.password):
+        return False
+
+    return user
