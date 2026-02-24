@@ -39,3 +39,10 @@ def delete_song(database, song_id, current_user):
         song = database.query(Song).filter(Song.id == song_id).first()
     else:
         song = database.query(Song).filter(Song.id == song_id, Song.owner_id == current_user.id).first()
+
+    if not song:
+        return None
+    database.delete(song)
+    database.commit()
+
+    return True
