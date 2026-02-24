@@ -23,3 +23,6 @@ def remove_song(song_id: int, database: Session = Depends(get_db),current_user: 
     if not deleted_song:
         raise HTTPException(status_code=404, detail="Song not found")
     return {"message": "Song deleted successfully"}
+
+@router.put("/{song_id}")
+def update_a_song(song_id: int, song: songUpdate)
