@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from repositories.database import Base
 
 
-class song(Base):
+class Song(Base):
     __tablename__ = "songs"
 
     id = Column(Integer, primary_key=True, index=True)
