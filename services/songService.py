@@ -18,3 +18,15 @@ def update_song(database, song_id, song_data, current_user):
 
     if current_user.role == "admin":
         song = database.query(Song).filter(Song.id == song_id).first()
+    else:
+        song = database.query(Song).filter(Song.id == song_id, Song.owner_id == current_user).first()
+
+    if not song:
+        return False
+
+    database.delete(song)
+    database.commit()
+
+    return True
+
+def
