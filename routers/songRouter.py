@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from models.user import User
 from repositories.authDependency import get_current_user
 from repositories.database import get_db
-from schemas.songSchemas import createSong, deleteSong
-from services.songService import create_song, search_songs, delete_song
+from schemas.songSchemas import createSong, deleteSong, updateSong
+from services.songService import create_song, search_songs, delete_song, update_song
 
 router = APIRouter(prefix="/songs")
 
@@ -25,4 +25,10 @@ def remove_song(song_id: int, database: Session = Depends(get_db),current_user: 
     return {"message": "Song deleted successfully"}
 
 @router.put("/{song_id}")
-def update_a_song(song_id: int, song: songUpdate)
+def update_a_song(song_id: int, song: updateSong, database: Session = Depends(get_db),current_user: User = Depends(get_current_user)):
+
+    updated_song = update_song(database, song_id, current_user,song)
+
+    if not updated_song:
+        raise HTTPException(status_code=404, detail="Song not found")
+    return {"message": "Song updated successfully"}
