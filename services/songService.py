@@ -29,4 +29,5 @@ def update_song(database, song_id, song_data, current_user):
 
     return True
 
-def
+def search_songs(database,query):
+    return database.query(Song).filter(Song.title.like(f"%{query}%")).all()
