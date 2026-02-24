@@ -13,5 +13,8 @@ def add_song(song: createSong, database: Session = Depends(get_db),current_user:
     return create_song(database, song, current_user)
 
 @router.get("/search")
-def search(query: str, database: Session = Depends(get_db),current_user: User = Depends(get_current_user)):
+def search_song(query: str, database: Session = Depends(get_db),current_user: User = Depends(get_current_user)):
     return search_songs(database, query)
+
+@router.delete("/{song_id}")
+def remove_song
