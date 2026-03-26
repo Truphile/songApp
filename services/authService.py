@@ -15,6 +15,7 @@ def register_user(database, user_data):
 
     try:
         new_user = User(
+        full_name=user_data.full_name,
         password = hash_password(user_data.password),
         email = user_data.email,
         role = "user"
