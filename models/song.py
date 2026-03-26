@@ -12,4 +12,4 @@ class Song(Base):
 
     owner_id = Column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("user", back_populates="songs")
+    owner = relationship("User", back_populates="songs")
